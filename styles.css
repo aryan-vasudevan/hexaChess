@@ -1,0 +1,21 @@
+body {
+    background-color: grey;
+}
+
+.board-section{
+    display: flex;
+    justify-content: center;
+    margin-top: 100;
+}
+
+.board {
+    width: 45%;
+    height: auto;
+    transform: rotate(30deg);
+    position: absolute;
+}
+
+img {
+    position: absolute;
+    
+}
