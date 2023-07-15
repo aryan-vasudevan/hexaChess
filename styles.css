@@ -16,6 +16,12 @@ body {
 }
 
 img {
-    position: absolute;
+    width: 50;
+    height: auto;
     
+}
+
+.tile {
+    position: relative;
+    display: inline
 }
