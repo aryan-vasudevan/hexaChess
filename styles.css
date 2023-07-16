@@ -11,17 +11,20 @@ body {
 .board {
     width: 45%;
     height: auto;
-    transform: rotate(30deg);
-    position: absolute;
+    margin-top: 100;
+}
+
+.row {
+    width: 100%;
+
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 img {
-    width: 50;
-    height: auto;
-    
-}
-
-.tile {
-    position: relative;
-    display: inline
+    width: 35;
+    height: 35;
+    margin-left: 40;
+    margin-right: 40;
 }
