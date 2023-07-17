@@ -104,17 +104,18 @@ class Tile {
     createTile() {
         var tile = document.createElement("img");
         tile.setAttribute("class", "tile");
-        tile.setAttribute("id", this.tileId + "-tile");
+        tile.setAttribute("id", this.tileId + "-t");
 
         if (this.row % 3 === 1) {
-            var path = "tile2.png"
+            var path = "tile1.png"
         } else if (this.row % 3 === 2) {
             var path = "tile3.png"
         } else if (this.row % 3 === 0) {
-            var path = "tile1.png"
+            var path = "tile2.png"
         }
         tile.src = "img/tiles/" + path;
         document.getElementById(this.containerId).appendChild(tile);
+        tile.addEventListener("click", handleclick);
     }
 
     // Create a piece in the same div as the tile
@@ -125,8 +126,9 @@ class Tile {
             
             piece.src = "img/pieces/" + pieceLocations[this.tuple];
             piece.setAttribute("class", "piece");
-            piece.setAttribute("id", this.tileId + "-piece");
+            piece.setAttribute("id", this.tileId + "-p");
             document.getElementById(this.containerId).appendChild(piece);
+            piece.addEventListener("click", handleclick);
         }
     }
 }
@@ -149,6 +151,16 @@ for (var i = 0; i < 21; i++) {
             tile.createContainer();
             tile.createTile();
             tile.loadPiece();
+        }
+    }
+}
+
+// Move Piece
+function handleclick() {
+    console.log(this.id)
+    if (this.id.slice(-1) === "t") {
+        if (this.nextElementSibling != null) {
+            console.log("sibling", this.nextElementSibling)
         }
     }
 }
