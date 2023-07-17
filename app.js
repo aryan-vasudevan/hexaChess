@@ -105,7 +105,15 @@ class Tile {
         var tile = document.createElement("img");
         tile.setAttribute("class", "tile");
         tile.setAttribute("id", this.tileId + "-tile");
-        tile.src = "img/tile.png";
+
+        if (this.row % 3 === 1) {
+            var path = "tile2.png"
+        } else if (this.row % 3 === 2) {
+            var path = "tile3.png"
+        } else if (this.row % 3 === 0) {
+            var path = "tile1.png"
+        }
+        tile.src = "img/tiles/" + path;
         document.getElementById(this.containerId).appendChild(tile);
     }
 
