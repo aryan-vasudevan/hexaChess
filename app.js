@@ -25,9 +25,57 @@ const boardMap = [
 
 // Locations of Pieces (Constant at the begining)
 const pieceLocations = {
+// White Piecesb    // Bishop
     "1 1": 'bishop-w.png',
-    "2 3": 'bishop-w.png',
-    "3 5": 'bishop-w.png'
+    "3 2": 'bishop-w.png',
+    "5 3": 'bishop-w.png',
+    // Queen
+    "2 1": 'queen-w.png',
+    // King
+    "2 2": 'king-w.png',
+    // Knight
+    "3 1": 'knight-w.png',
+    "3 3": 'knight-w.png',
+    // Rook
+    "4 1": 'rook-w.png',
+    "4 4": 'rook-w.png',
+    // Pawn
+    "5 1": 'pawn-w.png',
+    "6 2": 'pawn-w.png',
+    "7 2": 'pawn-w.png',
+    "8 3": 'pawn-w.png',
+    "9 3": 'pawn-w.png',
+    "8 4": 'pawn-w.png',
+    "7 4": 'pawn-w.png',
+    "6 5": 'pawn-w.png',
+    "5 5": 'pawn-w.png',
+
+// Black Pieces
+    // Bishop
+    "21 1": 'bishop-b.png',
+    "19 2": 'bishop-b.png',
+    "17 3": 'bishop-b.png',
+    // Queen
+    "20 1": 'queen-b.png',
+    // King
+    "20 2": 'king-b.png',
+    // Knight
+    "19 1": 'knight-b.png',
+    "19 3": 'knight-b.png',
+    // Rook
+    "18 1": 'rook-b.png',
+    "18 4": 'rook-b.png',
+    // Pawn
+    "17 1": 'pawn-b.png',
+    "16 2": 'pawn-b.png',
+    "15 2": 'pawn-b.png',
+    "14 3": 'pawn-b.png',
+    "13 3": 'pawn-b.png',
+    "14 4": 'pawn-b.png',
+    "15 4": 'pawn-b.png',
+    "16 5": 'pawn-b.png',
+    "17 5": 'pawn-b.png',
+
 };
 
 class Tile {
