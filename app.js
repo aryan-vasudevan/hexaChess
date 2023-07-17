@@ -1,3 +1,6 @@
+// INITIAL START 
+//
+//
 // Map of the Board (Constant)
 const boardMap = [
     ['', '', '', '', '', 't', '', '', '', '', ''],
@@ -78,12 +81,13 @@ const pieceLocations = {
 
 };
 
+// Tile
 class Tile {
     constructor(row, tileNum) {
         this.row = row;
         this.tileNum = tileNum;
         this.tuple = this.row.toString() + " " + this.tileNum;
-        this.rowId = row.toString();
+        this.rowId = this.row.toString();
         this.tileId = this.rowId + "-" + this.tileNum;
         this.containerId = this.tileId + "-container";
     }
@@ -100,10 +104,8 @@ class Tile {
     createTile() {
         var tile = document.createElement("img");
         tile.setAttribute("class", "tile");
-        console.log(this.tileId)
         tile.setAttribute("id", this.tileId + "-tile");
         tile.src = "img/tile.png";
-
         document.getElementById(this.containerId).appendChild(tile);
     }
 
@@ -135,12 +137,10 @@ for (var i = 0; i < 21; i++) {
     for (var j = 0; j < 11; j++) {
         if (boardMap[i][j] != '') {
             tileNum++;
-            var tile = new Tile(i + 1, tileNum);
+            var tile = new Tile(i + 1, tileNum, pieceLocations);
             tile.createContainer();
             tile.createTile();
             tile.loadPiece();
         }
     }
 }
-
-

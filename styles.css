@@ -2,40 +2,50 @@ body {
     background-color: grey;
 }
 
-.board-section{
-    display: flex;
-    justify-content: center;
-    margin-top: 100;
+.header {
+    width: 100%;
+    height: 100;
+    background-color: black;
+    color: white;
+    font-family: Calibri;
+    top: 0;
+    left: 0;
+}
+
+.header-text {
+    margin: 0;
+}
+.placeholder {
+    height: 150;
 }
 
 .board {
     width: 45%;
     height: auto;
+    padding-top: 100;
     margin-top: 100;
 }
 
 .row {
     width: 100%;
-
-    overflow: hidden;
+    margin-top: -35;
     display: flex;
     justify-content: center;
 }
 
 .tile {
-    width: 35;
-    height: 35;
-    padding-left: 40;
-    padding-right: 40;
+    width: 60;
+    height: 60;
+    padding: 0 15;
     z-index: 0;
 }
 
 .piece {
     position: absolute;
-    width: 28;
-    height: 28;
-    right: 38%;
-    bottom: 5;
+    width: 35;
+    height: 35;
+    right: 28;
+    bottom: 15;
     z-index: 1;
 }
 
