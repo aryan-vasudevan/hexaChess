@@ -27,140 +27,162 @@ const boardMap = [
 ];
 
 // Locations of Pieces (Constant at the begining)
-const pieceLocations = {
-// White Piecesb    // Bishop
-    "1 1": 'bishop-w.png',
-    "3 2": 'bishop-w.png',
-    "5 3": 'bishop-w.png',
+const pieceInfo = {
+// White Pieces
+   // Bishop
+    'bishop-1-w': ['bishop-w.png', '1-1' ],
+    'bishop-2-w': ['bishop-w.png', '3-2' ],
+    'bishop-3-w': ['bishop-w.png', '5-3' ],
     // Queen
-    "2 1": 'queen-w.png',
+    'queen-w': ['queen-w.png', '2-1' ],
     // King
-    "2 2": 'king-w.png',
+    'king-w': ['king-w.png', '2-2' ],
     // Knight
-    "3 1": 'knight-w.png',
-    "3 3": 'knight-w.png',
+    'knight-1-w': ['knight-w.png', '3-1'],
+    'knight-2-w': ['knight-w.png', '3-3' ],
     // Rook
-    "4 1": 'rook-w.png',
-    "4 4": 'rook-w.png',
+    'rook-1-w': ['rook-w.png', '4-1' ],
+    'rook-2-w': ['rook-w.png', '4-4' ],
     // Pawn
-    "5 1": 'pawn-w.png',
-    "6 2": 'pawn-w.png',
-    "7 2": 'pawn-w.png',
-    "8 3": 'pawn-w.png',
-    "9 3": 'pawn-w.png',
-    "8 4": 'pawn-w.png',
-    "7 4": 'pawn-w.png',
-    "6 5": 'pawn-w.png',
-    "5 5": 'pawn-w.png',
+    'pawn-1-w': ['pawn-w.png', '5-1' ],
+    'pawn-2-w': ['pawn-w.png', '6-2' ],
+    'pawn-3-w': ['pawn-w.png', '7-2' ],
+    'pawn-4-w': ['pawn-w.png', '8-3' ],
+    'pawn-5-w': ['pawn-w.png', '9-3' ],
+    'pawn-6-w': ['pawn-w.png', '8-4' ],
+    'pawn-7-w': ['pawn-w.png', '7-4' ],
+    'pawn-8-w': ['pawn-w.png', '6-5' ],
+    'pawn-9-w': ['pawn-w.png', '5-5' ],
 
 // Black Pieces
     // Bishop
-    "21 1": 'bishop-b.png',
-    "19 2": 'bishop-b.png',
-    "17 3": 'bishop-b.png',
+    'bishop-1-b': ['bishop-b.png',"21-1"],
+    'bishop-2-b': ['bishop-b.png',"19-2"],
+    'bishop-3-b': ['bishop-b.png',"17-3"],
     // Queen
-    "20 1": 'queen-b.png',
+    'queen-b': ['queen-b.png',"20-1"],
     // King
-    "20 2": 'king-b.png',
+    'king-b': ['king-b.png', "20-2"],
     // Knight
-    "19 1": 'knight-b.png',
-    "19 3": 'knight-b.png',
+    'knight-1-b': ['knight-b.png',"19-1"],
+    'knight-2-b': ['knight-b.png',"19-3"],
     // Rook
-    "18 1": 'rook-b.png',
-    "18 4": 'rook-b.png',
+    'rook-1-b': ['rook-b.png', "18-1"],
+    'rook-2-b': ['rook-b.png',  "18-4"],
     // Pawn
-    "17 1": 'pawn-b.png',
-    "16 2": 'pawn-b.png',
-    "15 2": 'pawn-b.png',
-    "14 3": 'pawn-b.png',
-    "13 3": 'pawn-b.png',
-    "14 4": 'pawn-b.png',
-    "15 4": 'pawn-b.png',
-    "16 5": 'pawn-b.png',
-    "17 5": 'pawn-b.png',
-
+    'pawn-1-b': ['pawn-b.png', "17-1"],
+    'pawn-2-b': ['pawn-b.png', "16-2"],
+    'pawn-3-b': ['pawn-b.png', "15-2"],
+    'pawn-4-b': ['pawn-b.png', "14-3"],
+    'pawn-5-b': ['pawn-b.png', "13-3"],
+    'pawn-6-b': ['pawn-b.png', "14-4"],
+    'pawn-7-b': ['pawn-b.png', "15-4"],
+    'pawn-8-b': ['pawn-b.png', "16-5"],
+    'pawn-9-b': ['pawn-b.png', "17-5"]
 };
 
 // Tile
 class Tile {
-    constructor(row, tileNum) {
+    constructor(row, column, tileSrc) {
         this.row = row;
-        this.tileNum = tileNum;
-        this.tuple = this.row.toString() + " " + this.tileNum;
-        this.rowId = this.row.toString();
-        this.tileId = this.rowId + "-" + this.tileNum;
-        this.containerId = this.tileId + "-container";
+        this.column = column;
+        this.containerId = `${row.toString()}-${column}`;
+        this.tileId = `${row.toString()}-${column}-t`;
+        this.tileSrc = tileSrc;
     }
-    
-    // Create a div for both the tiles and the pieces
-    createContainer() {
+
+    // Method for loading tile
+    createTile() {
         var container = document.createElement("div");
-        document.getElementById(this.rowId).appendChild(container);
         container.setAttribute("id", this.containerId);
         container.setAttribute("class", "container");
-    }
-    
-    // Create a tile
-    createTile() {
+        container.addEventListener("click", handleclick);
+        document.getElementById(this.row).appendChild(container);
+
         var tile = document.createElement("img");
+        tile.setAttribute("id", this.tileId);
         tile.setAttribute("class", "tile");
-        tile.setAttribute("id", this.tileId + "-t");
+        tile.src = this.tileSrc;
+        container.appendChild(tile);
+    }  
+}   
 
-        if (this.row % 3 === 1) {
-            var path = "tile1.png"
-        } else if (this.row % 3 === 2) {
-            var path = "tile3.png"
-        } else if (this.row % 3 === 0) {
-            var path = "tile2.png"
-        }
-        tile.src = "img/tiles/" + path;
-        document.getElementById(this.containerId).appendChild(tile);
-        tile.addEventListener("click", handleclick);
+class Piece {
+    constructor(name) {
+        this.name = name;
+        this.pos = pieceInfo[this.name][1];
+        this.id = `${name}`;
     }
 
-    // Create a piece in the same div as the tile
-    loadPiece() {
+    // Method for loading a piece
+    loadPeice() {
+        parent = document.getElementById(`${this.pos}`);
 
-        if (this.tuple in pieceLocations) {
-            var piece = document.createElement("img");
-            
-            piece.src = "img/pieces/" + pieceLocations[this.tuple];
-            piece.setAttribute("class", "piece");
-            piece.setAttribute("id", this.tileId + "-p");
-            document.getElementById(this.containerId).appendChild(piece);
-            piece.addEventListener("click", handleclick);
-        }
+        var piece = document.createElement("img");
+        piece.src = `img/pieces/${pieceInfo[this.name][0]}`;
+        piece.setAttribute("id", this.id);
+        piece.setAttribute("class", "piece");
+        parent.appendChild(piece);
     }
 }
 
-// Board Setup
-for (var i = 0; i < 21; i++) {
-    // Create the rows
-    var row_object = document.createElement("div");
-    row_object.setAttribute("id", (i + 1).toString());
-    row_object.setAttribute("class", "row");
+// Function for board setup
+function setBoard() {
+    for (var i = 1; i <= 21; i++) {
+        // Create the rows
+        var row_object = document.createElement("div");
+        row_object.setAttribute("id", i.toString());
+        row_object.setAttribute("class", "row");
+        document.getElementById("board").appendChild(row_object);
 
-    document.getElementById("board").appendChild(row_object);
+        // Create the tiles and pieces
+        var column = 0;
+        var row = i;
+        var tileSrc = `tile${i % 3}.png`;
 
-    // Create the tiles and pieces
-    var tileNum = 0;
-    for (var j = 0; j < 11; j++) {
-        if (boardMap[i][j] != '') {
-            tileNum++;
-            var tile = new Tile(i + 1, tileNum, pieceLocations);
-            tile.createContainer();
-            tile.createTile();
-            tile.loadPiece();
-        }
+        for (var j = 1; j <= 11; j++) {
+            if (boardMap[i - 1][j - 1] != '') {
+                column++;
+                var tile = new Tile(row, column, "img/tiles/" + tileSrc);
+                tile.createTile();
+            }
+        } 
+    }    
+}
+
+// Function for setting peices at the begining
+function setPeices() {
+    for (var name of Object.keys(pieceInfo)) {
+        var piece = new Piece(name);
+        piece.loadPeice();
     }
 }
 
-// Move Piece
+// Function for updating a piece position if it needs to be moved
+function updatePeice(newPos, pieceId) {
+    parent = document.getElementById(newPos);
+    parent.appendChild(document.getElementById(pieceId));
+}
+
+
+// What should happend when something is clicked
+var held = [];
+
 function handleclick() {
-    console.log(this.id)
-    if (this.id.slice(-1) === "t") {
-        if (this.nextElementSibling != null) {
-            console.log("sibling", this.nextElementSibling)
-        }
+    if (this.children.length === 2) {
+        held = [this.children[1].id, "p"];
+    
+    // Check if a tile was clicked. If a tile was clicked and the last thing clicked was a piece, move the piece to the new tile
+    } else if (held.length > 1 && held[1] === "p") {
+        var pieceId = held[0];
+        var pieceSrc = pieceInfo[pieceId][0];
+
+        // Update the Piece Position
+        pieceInfo[pieceId] = [pieceSrc, this.id];
+        updatePeice(this.id, held[0])
+        held = []; 
     }
 }
+
+setBoard();
+setPeices();
